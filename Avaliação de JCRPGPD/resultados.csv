@@ -1,0 +1,8 @@
+Configuracao,Threads,QuantidadeDados,TempoMs,Speedup,Eficiencia
+Sequencial,1,1000000,6,1.00,100.0
+Executor,2,1000000,8,0.75,37.5
+Executor,4,1000000,6,1.00,25.0
+Executor,8,1000000,7,0.86,10.7
+Executor + Affinity,2,1000000,6,1.00,50.0
+Executor + Affinity,4,1000000,7,0.86,21.4
+Executor + Affinity,8,1000000,30,0.20,2.5
