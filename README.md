@@ -1,7 +1,7 @@
 # Análise Paralela de Transações Financeiras com Java
 
 > **1ª Avaliação da Disciplina de Programação Paralela e Distribuída (JCRPGPD)**  
-> **Instituto Federal de São Paulo (IFSP) – Campus Jacareí**  
+> **Instituto Federal de São Paulo (IFSP) – Câmpus Jacareí**  
 > Docente: **Prof. Lineu Mialaret**
 
 ---
@@ -30,35 +30,63 @@ Conforme as diretrizes da avaliação, as responsabilidades e implementações f
 
 ---
 
+## 📈 Resultados Experimentais (10 Milhões de Transações)
+
+Os ensaios foram realizados em ambiente com processador multi-core sob Java 17 com warm-up prévio da JVM:
+
+| Configuração | Threads | Volume de Dados | Tempo (ms) | Speedup ($S_p$) | Eficiência ($E_p$) |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Sequencial** | 1 | 10.000.000 | **62 ms** | 1,00x | 100,0% |
+| **ExecutorService** | 2 | 10.000.000 | **78 ms** | 0,79x | 39,7% |
+| **ExecutorService** | 4 | 10.000.000 | **36 ms** | **1,72x** | **43,1%** |
+| **ExecutorService** | 8 | 10.000.000 | **29 ms** | **2,14x** | **26,7%** |
+| **Executor + Affinity** | 2 (CPUs 0,1) | 10.000.000 | **65 ms** | **0,95x** | **47,7%** |
+| **Executor + Affinity** | 4 (CPUs 0-3) | 10.000.000 | **41 ms** | **1,51x** | **37,8%** |
+| **Executor + Affinity** | 8 (CPUs 0-7) | 10.000.000 | **33 ms** | **1,88x** | **23,5%** |
+
+### 🔍 Gráfico de Desempenho
+
+![Gráfico de Speedup e Eficiência](Avaliação%20de%20JCRPGPD/grafico_desempenho.png)
+
+* **Impacto da Afinidade em 2 Threads:** A fixação de núcleo reduziu o tempo de execução de **78 ms para 65 ms**, elevando a eficiência de 39,7% para 47,7% graças à preservação das linhas de cache L1/L2.
+* **Comportamento em 8 Threads:** Em concorrência ampla, o ganho de velocidade atinge seu pico (**29 ms**, Speedup de **2,14x**). Em máquinas com Hyper-Threading/SMT, os núcleos lógicos compartilham o barramento de memória, tornando o problema preponderantemente *memory-bound*.
+
+---
+
 ## 📁 Estrutura do Repositório
 
 ```text
-Avaliação de JCRPGPD/
-├── README.md                                                             # Este arquivo
-├── pom.xml                                                               # Gerenciador de dependências Maven
-├── executar.bat                                                          # Executável 1-clique para 10M de transações
-├── executar_rapido.bat                                                   # Executável rápido para 1M de transações
-├── gerar_graficos.py                                                     # Script para plotar Speedup e Eficiência
-├── grafico_desempenho.png                                                # Gráfico gerado do benchmark
-├── resultados.csv                                                        # Tabela bruta com as medições
+ParalelismoJavaIF/
+├── Avaliação de JCRPGPD/                                                 # Pasta com o código-fonte e automações
+│   ├── lib/                                                              # Bibliotecas nativas da OpenHFT Affinity e JNA
+│   │   ├── affinity-3.23.3.jar
+│   │   ├── jna-5.13.0.jar
+│   │   ├── jna-platform-5.13.0.jar
+│   │   ├── slf4j-api-1.7.36.jar
+│   │   └── slf4j-simple-1.7.36.jar
+│   ├── src/
+│   │   └── main/
+│   │       └── java/
+│   │           └── jcrpgpd/                                              # Código-fonte Java modular
+│   │               ├── Transacao.java
+│   │               ├── GeradorDados.java
+│   │               ├── HelenaVieiraAgregacao.java
+│   │               ├── CamilaRibeiroSuspeitasECategorias.java
+│   │               ├── MariaClaraPastorBenchmarkEAfinidade.java
+│   │               └── Main.java
+│   ├── executar.bat                                                      # Executável para 10M de transações
+│   ├── executar_rapido.bat                                               # Executável rápido para 1M de transações
+│   ├── gerar_graficos.py                                                 # Script para plotar Speedup e Eficiência
+│   ├── grafico_desempenho.png                                            # Gráfico gerado do benchmark
+│   ├── pom.xml                                                           # Gerenciador de dependências Maven
+│   └── resultados.csv                                                    # Tabela bruta com as medições
 │
-├── lib/                                                                  # Bibliotecas nativas da OpenHFT Affinity e JNA
-│   ├── affinity-3.23.3.jar
-│   ├── jna-5.13.0.jar
-│   ├── jna-platform-5.13.0.jar
-│   ├── slf4j-api-1.7.36.jar
-│   └── slf4j-simple-1.7.36.jar
-│
-└── src/
-    └── main/
-        └── java/
-            └── jcrpgpd/                                                  # Código-fonte Java modular
-                ├── Transacao.java
-                ├── GeradorDados.java
-                ├── HelenaVieiraAgregacao.java
-                ├── CamilaRibeiroSuspeitasECategorias.java
-                ├── MariaClaraPastorBenchmarkEAfinidade.java
-                └── Main.java
+├── 1ª Avaliação de JCRPGPD – Programação Paralela e Distribuída.pdf            # Relatório de desenvolvimento
+├── Relatório 1ª Avaliação de JCRPGPD – Programação Paralela e Distribuída.pdf  # Relatório técnico completo (16 seções)
+├── Requisitos 1º avaliação de JCRPGPD.pdf                                # Documento com as diretrizes da avaliação
+├── Slides Apresentação - Análise Paralela de Transações Financeiras.pdf  # Slides da apresentação para a defesa
+├── LICENSE                                                               # Licença do repositório
+└── README.md                                                             # Este documento
 ```
 
 ---
@@ -72,7 +100,7 @@ Avaliação de JCRPGPD/
 ---
 
 ### Opção 1: Execução Automática no Windows (Mais Simples)
-Basta dar um duplo clique nos arquivos `.bat`:
+Dentro da pasta **`Avaliação de JCRPGPD`**, basta dar um duplo clique nos arquivos `.bat`:
 * **`executar.bat`**: Compila e roda o benchmark completo com **10 milhões de transações** (requer cerca de 3 GB de RAM livres).
 * **`executar_rapido.bat`**: Compila e roda a validação expressa com **1 milhão de transações**.
 
@@ -80,17 +108,22 @@ Basta dar um duplo clique nos arquivos `.bat`:
 
 ### Opção 2: Pelo Terminal / PowerShell
 
-1. **Compilar o código:**
+1. **Acessar a pasta do projeto:**
+   ```bash
+   cd "Avaliação de JCRPGPD"
+   ```
+
+2. **Compilar o código:**
    ```bash
    javac -encoding UTF-8 -cp "lib/*;." -d bin src/main/java/jcrpgpd/*.java
    ```
 
-2. **Executar a aplicação:**
+3. **Executar a aplicação:**
    ```bash
    java -Xmx3g -cp "bin;lib/*" -Dorg.slf4j.simpleLogger.defaultLogLevel=error --enable-native-access=ALL-UNNAMED jcrpgpd.Main 10000000
    ```
 
-3. *(Opcional)* **Regerar o gráfico de desempenho:**
+4. *(Opcional)* **Regerar o gráfico de desempenho:**
    ```bash
    python gerar_graficos.py
    ```
