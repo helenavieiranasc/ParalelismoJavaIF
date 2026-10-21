@@ -6,7 +6,7 @@
 
 ---
 
-## 📌 Sobre o Projeto
+## Sobre o Projeto
 
 Este projeto consiste em uma aplicação de alto desempenho desenvolvida em **Java 17** para o processamento e auditoria analítica de grandes volumes de transações financeiras sintéticas (**1 milhão** a **10 milhões** de registros), aplicando os fundamentos de **Paralelismo de Dados**.
 
@@ -14,7 +14,7 @@ O objetivo central foi investigar experimentalmente o impacto do framework de co
 
 ---
 
-## 👥 Equipe e Contribuição Individual
+## Equipe e Contribuição Individual
 
 Conforme as diretrizes da avaliação, as responsabilidades e implementações foram divididas de forma modular e bem delimitada:
 
@@ -30,7 +30,7 @@ Conforme as diretrizes da avaliação, as responsabilidades e implementações f
 
 ---
 
-## 📈 Resultados Experimentais (10 Milhões de Transações)
+## Resultados Experimentais (10 Milhões de Transações)
 
 Os ensaios foram realizados em ambiente com processador multi-core sob Java 17 com warm-up prévio da JVM:
 
@@ -44,7 +44,7 @@ Os ensaios foram realizados em ambiente com processador multi-core sob Java 17 c
 | **Executor + Affinity** | 4 (CPUs 0-3) | 10.000.000 | **41 ms** | **1,51x** | **37,8%** |
 | **Executor + Affinity** | 8 (CPUs 0-7) | 10.000.000 | **33 ms** | **1,88x** | **23,5%** |
 
-### 🔍 Gráfico de Desempenho
+### Gráfico de Desempenho
 
 ![Gráfico de Speedup e Eficiência](Avaliação%20de%20JCRPGPD/grafico_desempenho.png)
 
@@ -53,7 +53,7 @@ Os ensaios foram realizados em ambiente com processador multi-core sob Java 17 c
 
 ---
 
-## 📁 Estrutura do Repositório
+## Estrutura do Repositório
 
 ```text
 ParalelismoJavaIF/
@@ -91,7 +91,7 @@ ParalelismoJavaIF/
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 ### Pré-requisitos
 * **Java Development Kit (JDK) 17** ou superior instalado.
@@ -130,7 +130,7 @@ Dentro da pasta **`Avaliação de JCRPGPD`**, basta dar um duplo clique nos arqu
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 * **Java 17 (LTS)**: Linguagem principal da aplicação.
 * **`java.util.concurrent`**: ExecutorService, Callable, Future e ThreadPools.
@@ -141,7 +141,7 @@ Dentro da pasta **`Avaliação de JCRPGPD`**, basta dar um duplo clique nos arqu
 
 ---
 
-## 📚 Referências
+## Referências
 
 1. GOETZ, Brian et al. *Java Concurrency in Practice*. Boston: Addison-Wesley Professional, 2006.
 2. MIALARET, Lineu. *Notas de Aula da Disciplina de Programação Paralela e Distribuída (JCRPGPD)*. Jacareí: IFSP, 2026.
