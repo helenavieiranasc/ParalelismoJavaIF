@@ -146,4 +146,4 @@ Dentro da pasta **`Avaliação de JCRPGPD`**, basta dar um duplo clique nos arqu
 1. GOETZ, Brian et al. *Java Concurrency in Practice*. Boston: Addison-Wesley Professional, 2006.
 2. MIALARET, Lineu. *Notas de Aula da Disciplina de Programação Paralela e Distribuída (JCRPGPD)*. Jacareí: IFSP, 2026.
 3. OPENHFT. *Java-Thread-Affinity: Bind Java Threads to specific CPU Cores*. Versão 3.23.3. Repositório GitHub: [OpenHFT/Java-Thread-Affinity](https://github.com/OpenHFT/Java-Thread-Affinity).
-4. ORACLE. *Java Platform, Standard Edition & JDK Version 17 API Specification: Package java.util.concurrent*. Oracle Corporation, 2021.
+4. ORACLE. *Java Platform, Standard Edition & JDK Version 17 API Specification: Package java.util.concurrent*. Oracle Corporation, 2021. 
